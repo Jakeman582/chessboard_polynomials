@@ -1,7 +1,7 @@
 # chessboard_polynomials
 A Python script for calculating chessboard polynomials
 
-"""Load chessboard data from a text file and compute its Rook Polynomial
+Load chessboard data from a text file and compute its Rook Polynomial
 Reads in chessboard data from a text file.
 Only symbols 0 and 1 have meaning. 0 means a restricted cell, and 1 
 represents an available cell. Any other symbols (including spaces) 
@@ -37,4 +37,4 @@ For the chessboard example above, the output will look like this:
 [][][]
   []
 1x^0 + 5x^1 + 4x^2
-"""
+
