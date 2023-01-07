@@ -11,8 +11,8 @@ The rook polynomial of this chessboard is 1 + 9x + 18x^2 + 6x^3. Here, the expon
 
 Suppose we want to calculate the Rook Polynomial of 3 by 3 board, we need a text file (which we'll call board_1.txt)
 that looks like this:
-111
-111
+111  
+111  
 111
 
 To do this calculation, use the following code:
@@ -21,9 +21,9 @@ To do this calculation, use the following code:
 > python chessboard_polynomials.py board_1.txt
 
 The result will look like this:
-[][][]
-[][][]
-[][][]
+[ ][ ][ ]  
+[ ][ ][ ]  
+[ ][ ][ ]  
 1x^0 + 9x^1 + 18x^2 + 6x^3
 
 A chess board does not have to be square. For example, consider the 3 by 4 chessboard below:
