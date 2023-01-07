@@ -49,9 +49,9 @@ In order to represent holes in these boards, use 0 when defining the matrix. To 
 
 As another example, consider a 3 by 3 board with the corners removed:
 
-&nbsp;&nbsp;[]  
-[][][]  
-&nbsp;&nbsp;[]  
+&nbsp;&nbsp;[ ]  
+[ ][ ][ ]  
+&nbsp;&nbsp;[ ]  
   
 To encode this matrix, use this text file:
 
