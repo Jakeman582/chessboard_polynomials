@@ -20,7 +20,7 @@ To do this calculation, use the following code:
 #Calculating the rook polynomial of the standard 3 by 3 chess board
 > python chessboard_polynomials.py board_1.txt
 
-The result will look like this:
+The result will look like this:  
 [ ][ ][ ]  
 [ ][ ][ ]  
 [ ][ ][ ]  
@@ -28,17 +28,17 @@ The result will look like this:
 
 A chess board does not have to be square. For example, consider the 3 by 4 chessboard below:
 
-[][][][]
-[][][][]
-[][][][]
+[ ][ ][ ][ ]  
+[ ][ ][ ][ ]  
+[ ][ ][ ][ ]
 
 The rook polynomial of this board is 1 + 12x + 36x^2 + 24x^3.
 
 Chess boards are also allowed to have holes, or gaps. For example, we can have a 3 by 3 chess board with the center removed, pictured below:
 
-[][][]
-[]  []
-[][][]
+[ ][ ][ ]  
+[ ]   [ ]  
+[ ][ ][ ]
 
 The rook polynomial of this board is 1 + 8x + 14x^2 + 4x^3.
 
