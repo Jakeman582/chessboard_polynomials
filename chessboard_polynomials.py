@@ -192,7 +192,144 @@ def rook_polynomial(board):
         # Now we can just return the sum, which will be the final answer
         return add_polynomials(polynomial_with_rook, polynomial_without_rook)
 
+def diagonalize_coordinate(board, row, column):
+
+    rows = len(board)
+    columns = len(board[0])
+
+    positive_diagonal = -1
+    negative_diagonal = -1
+
+    # Identifying which positive diagonal this cell is on
+    positive_diagonal = column + row
+
+    # Identifying the negative diagonal this cell is on
+    negative_diagonal = (rows - 1 - row) + column
+
+    return (positive_diagonal, negative_diagonal)
+
+def diagonalize_board(board):
+
+    rows = len(board)
+    columns = len(board[0])
+
+    number_positive_diagonals = rows + columns - 1
+    number_negative_diagonals = rows + columns - 1
+
+    diagonal_board = []
+    for i in range(number_positive_diagonals):
+        diagonal_board.append([])
+        for j in range(number_negative_diagonals):
+            diagonal_board[i].append('0')
+
+    for row in range(rows):
+        for column in range(columns):
+            if board[row][column] == '1':
+                coordinates = diagonalize_coordinate(board, row, column)
+                diagonal_board[coordinates[0]][coordinates[1]] = '1'
+
+    return diagonal_board
+
+def restrict_diagonals(board, row, column):
+
+    rows = len(board)
+    columns = len(board[0])
+
+    # Restrict cells going diagonally down to the right
+    i = 1
+    while row + i < rows and column + i < columns:
+        board[row + i][column + i] = '0'
+        i = i + 1
+
+    # Restrict cells going diagonally down to the left
+    i = 1
+    while row + i < rows and column - i >= 0:
+        board[row + i][column - i] = '0'
+        i = i + 1
+
+    # Restrict cells going diagonally up to the left
+    i = 1
+    while row - i >= 0 and column - i >= 0:
+        board[row - i][column - i] = '0'
+        i = i + 1
+
+    # Restrict cells going diagonally up to the right
+    i = 1
+    while row - i >= 0 and column + i < columns:
+        board[row - i][column + i] = '0'
+        i = i + 1
+
+    # Finally, restrict the given cell
+    board[row][column] = '0'
+
+def bishop_polynomial(board):
+
+    if count_cells(board) == 0:
+        # Base Case: No cells available (1 + 0x = 1)
+        return [1]
+    elif count_cells(board) == 1:
+        # Base Case: Only one cell available (1 + x)
+        return [1, 1]
+    else:
+
+        # We need to find the first available cell for decomposition
+        cell = find_first_open_cell(board)
+
+        # We'll still need to reference this board, so make copies that we 
+        # can modify
+        yes_bishop = copy.deepcopy(board)
+        no_bishop = copy.deepcopy(board)
+
+        # When placing a rook, restrict it's row and column
+        restrict_diagonals(yes_bishop, cell[0], cell[1])
+
+        # When not placing a rook, prevent this cell from being used
+        no_bishop[cell[0]][cell[1]] = '0'
+
+        # We'll need the rook polynomials for both sub-boards
+        polynomial_with_bishop = bishop_polynomial(yes_bishop)
+        polynomial_without_bishop = bishop_polynomial(no_bishop)
+
+        # Increment the exponents of the rook polynomial for the board we put a rook on
+        polynomial_with_bishop.insert(0, 0)
+
+        # We should make sure both lists have the same length to make adding the polynomials 
+        # easy
+        length_bishop = len(polynomial_with_bishop)
+        length_no_bishop = len(polynomial_without_bishop)
+        if length_bishop > length_no_bishop:
+            for i in range(length_bishop - length_no_bishop):
+                polynomial_without_bishop.append(0)
+
+        if length_no_bishop > length_bishop:
+            for i in range(length_no_bishop - length_bishop):
+                polynomial_with_bishop.append(0)
+
+        # Now we can just return the sum, which will be the final answer
+        return add_polynomials(polynomial_with_bishop, polynomial_without_bishop)
+
 if __name__ == "__main__":
+
     board = load_board(sys.argv[1])
+
+    #print_board(board)
+    #print_polynomial(rook_polynomial(board))
+
+    #diagonal_board = diagonalize_board(board)
+    #print_board(diagonal_board)
+
+    #restrict__diagonals(board, 1, 1)
+    #board[1][1] = '0'
+    #print_board(board)
+
+    #restrict_diagonals(board, 2, 2)
+    #print_board(board)
+
     print_board(board)
-    print_polynomial(rook_polynomial(board))
+    print_polynomial(bishop_polynomial(board))
+
+    print()
+    diagonal_board = diagonalize_board(board)
+    print_board(diagonal_board)
+    print_polynomial(rook_polynomial(diagonal_board))
+    
