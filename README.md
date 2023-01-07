@@ -42,21 +42,21 @@ Chess boards are also allowed to have holes, or gaps. For example, we can have a
 
 The rook polynomial of this board is 1 + 8x + 14x^2 + 4x^3.
 
-In order to represent holes in these boards, use 0 when defining the matrix. To encode the above example in a text file, use the following code:
-111
-101
+In order to represent holes in these boards, use 0 when defining the matrix. To encode the above example in a text file, use the following code:  
+111  
+101  
 111
 
 As another example, consider a 3 by 3 board with the corners removed:
 
   []  
-[][][]
-  []  
+[][][]  
+&nbsp;&nbsp;[]  
   
 To encode this matrix, use this text file:
 
-010
-111
+010  
+111  
 010
 
 This code does not take into account any color scheme of the chess board. The color of the squares will not affect the calculation of the rook polynomials. The important thing to remember when defining your board representation is that holes must be represented as 0. Any 1 component will be treated as a plain square.
