@@ -4,9 +4,7 @@ A Python script used to calculate the rook polynomial, bishop polynomial, and qu
 A rook polynomial is a type of generating function that encodes the number of ways to place any number of rooks on a given chess board such that no rook can be captured by any other rook. For example, consider the 3 by 3 chessboard given below:
 
 [][][]
-
 [][][]
-
 [][][]
 
 The rook polynomial of this chessboard is 1 + 9x + 18x^2 + 6x^3. Here, the exponent of x represents the number of rooks being placed on the chess board, and the coefficient tells you how many ways there are to place those rooks such that no rook can be captured. Becuase the coefficient of x^3 is 6, there are 6 ways to place 3 rooks on the 3 by 3 chessboard such that no rook is attacked by any other rook.
