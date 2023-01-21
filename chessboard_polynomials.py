@@ -136,60 +136,6 @@ def diagonalize_board(board):
 
     return diagonal_board
 
-def count_rook_cells(board):
-
-    count = 0
-
-    rows = len(board)
-    columns = len(board[0])
-
-    for row in range(rows):
-        for column in range(columns):
-            # Only '1' represents a permissible cell, '0' represents a restricted cell
-            if board[row][column] == '1' or board[row][column] == 'R':
-                count += 1
-    return count
-
-def count_bishop_cells(board):
-
-    count = 0
-
-    rows = len(board)
-    columns = len(board[0])
-
-    for row in range(rows):
-        for column in range(columns):
-            # Only '1' represents a permissible cell, '0' represents a restricted cell
-            if board[row][column] == '1' or board[row][column] == 'B':
-                count += 1
-    return count
-
-def find_first_open_rook_cell(board):
-
-    rows = len(board)
-    columns = len(board[0])
-
-    for row in range(rows):
-        for column in range(columns):
-            if board[row][column] == '1' or board[row][column] == 'R':
-                return [row, column]
-
-    # At this point, there are no vacant, permissible cells
-    return [-1, -1]
-
-def find_first_open_bishop_cell(board):
-
-    rows = len(board)
-    columns = len(board[0])
-
-    for row in range(rows):
-        for column in range(columns):
-            if board[row][column] == '1' or board[row][column] == 'B':
-                return [row, column]
-
-    # At this point, there are no vacant, permissible cells
-    return [-1, -1]
-
 def restrict_rook(board, row, column):
 
     for c in range(len(board[0])):
