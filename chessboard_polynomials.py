@@ -355,7 +355,7 @@ def chess_multinomial(board, restrict_1, restrict_2):
     # With only one cell left, we know what the Chess Polynomial will be
     elif count_cells(board) == 1:
 
-        # We'll need to know what ipeces this cell is open to
+        # We'll need to know what pieces this cell is open to
         [row, column] = find_cell(board)
 
         if board[row][column] == 'R':
@@ -427,13 +427,14 @@ def print_multinomial(m):
 
     for row in range(rows):
         for column in range(columns):
-            if row != 0 or column != 0:
-                print(" + ", end = "")
             if m[row][column] != 0:
+                if row != 0 or column != 0:
+                    print(" + ", end = "")
                 print(str(m[row][column]) + "(r^" + str(column) + ")(b^" + str(row) + ")", end = "")
 
     print()
 
 if __name__ == "__main__":
     board = load_board(sys.argv[1])
+    print_board(board)
     print_multinomial(chess_multinomial(board, restrict_rook, restrict_bishop))
