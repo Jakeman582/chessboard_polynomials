@@ -90,12 +90,12 @@ def print_board(board):
         # move to the next line
         print("")
 
-def print_polynomial(polynomial):
+def print_polynomial(polynomial, variable = 'x'):
 
     for index in range(len(polynomial)):
         if index != 0:
             print(" + ", end="")
-        print(str(polynomial[index]) + "x^" + str(index), end="")
+        print(str(polynomial[index]) + variable + "^" + str(index), end="")
     print("")
 
 def diagonalize_coordinate(board, row, column):
@@ -175,6 +175,14 @@ def restrict_bishop(board, row, column):
 
     # Finally, restrict the given cell
     board[row][column] = '0'
+
+def restrict_queen(board, row, column):
+
+    # Restrict the row and column
+    restrict_rook(board, row, column)
+
+    # Restrict the diagonals at this row and column
+    restrict_bishop(board, row, column)
 
 def restrict_bishop_from_rooks(board, row, column):
 
@@ -437,4 +445,5 @@ def print_multinomial(m):
 if __name__ == "__main__":
     board = load_board(sys.argv[1])
     print_board(board)
-    print_multinomial(chess_multinomial(board, restrict_rook, restrict_bishop))
+    print()
+    print_polynomial(chess_polynomial(board, restrict_queen), 'q')
